@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Todo</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <script src="https://kit.fontawesome.com/50b7b8b773.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+    <div class="app" id="app" v-cloak>
+        <transition name="fade">
+            <div class="modal-preloader" v-if="preloader">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        <div class="todo">
+            <div class="todo__wrapper">
+                <h1 class="todo__title">{{title}}</h1>
+                <form class="todo__form form">
+                    <input type="text" class="form__input" v-model="task">
+                    <button class="form__btn" @click.prevent="addNote"><i class="fas fa-plus-circle"></i></button>
+                </form>
+                <div class="todo__wrap" v-if="notes.length">
+                    <ul class="todo__list">
+                        <li class="todo__item" v-for="(note, i) in notes" key="i">
+                            <p class="todo__description">{{note}}</p>
+                            <button class="todo__btn" @click="removeOne(i)"><i class="fas fa-times-circle"></i></button>
+                        </li>
+                    </ul>
+                    <button class="todo__reset" @click="removeAll">Remove All</button>
+                </div>
+                <p class="todo__text" v-else>notes is empty</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="script/script.js"></script>
+</body>
+</html>
